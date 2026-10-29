@@ -23,6 +23,8 @@ async function showMovies() {
         if(moviesList && moviesList.length > 0){
             updateBanner(currentIndex);
             startAutoSlide();
+
+            renderMovieRow(moviesList);
         }
     }
     catch (error){
@@ -117,4 +119,37 @@ async function getMovieCertification(movieId) {
     }
 
 }
-    showMovies();
+
+function renderMovieRow(movies){
+    const gridContainer = document.getElementById('movies-row');
+    if(!gridContainer) return;
+
+    gridContainer.innerHTML = ''; /*clear grid before*/
+
+    /* The TMDb uses "poster_path" to the vertical posters on grid */
+    movies.forEach(movie => {
+        const posterUrl = movie.poster_path
+        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+        : 'placeholder.jpg'; /* default image if the movie doesnt have poster*/
+        
+        const card = document.createElement('div');
+        card.classList.add('movie-card');
+
+        card.innerHTML = `<img src="${posterUrl}" alt="${movie.title}">`;
+        gridContainer.appendChild(card);  
+    });
+}
+
+function scrollRow(direction){
+    const row = document.getElementById('movies-row');
+    const scrollAmount = 450; /*how many pixels the row moves per click*/
+
+    if(direction === 'left'){
+        row.scrollBy({ left: -scrollAmount, behavior: 'smooth'})
+    }
+    else{
+        row.scrollBy({ left: scrollAmount, behavior: 'smooth'})
+    }
+}
+
+   showMovies();

@@ -21,6 +21,7 @@ header{
     width: 100vw;
     padding: 20px;
     background: linear-gradient(to right, rgb(219, 99, 0), #f77f00);
+    z-index: 10;
 }
 
 header nav ul{
@@ -210,7 +211,7 @@ header nav ul li:hover::after{
 
 .btn.prev {
     left: 20px;
-    text-indent: -2px;
+    text-indent: -4px;
 }
 
 .btn.next {
@@ -230,11 +231,93 @@ header nav ul li:hover::after{
     text-transform: uppercase;
 }
 
-
-
 .badge-g{ background-color: #449700;}
 .badge-pg{ background-color: #dacc06;}
 .badge-pg13{ background-color: #da5b06;}
 .badge-r{ background-color: #da2606;}
 .badge-nc17{ background-color: #630f00;}
 
+.movies-row-section{
+    position: relative;
+    width: 85%;
+    max-width: 1200px;
+    margin: 50px auto;
+}
+
+.movies-row-section h2{
+    font-family: "Outfit", sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+.movies-row{
+   display: flex;
+   gap: 20px;
+   overflow-x: auto; /*scroll all side*/
+   scroll-behavior: smooth;
+   padding: 10px 15px;
+   width: 100%;
+
+   scrollbar-width: none; /*hides the scroll bar on firefox*/
+}
+
+/*hides the scroll bar in other browsers*/
+.movies-row::-webkit-scrollbar{
+    display: none;
+}
+
+.movies-row .movie-card{
+    flex: 0 0 160px;
+    width: 160px;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.movies-row .movie-card:hover{
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+
+.movies-row .movie-card img{
+    cursor: pointer;
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+    display: block;
+}
+
+.row-btn{
+    position: absolute;
+    top: 50%;
+    transform: translateY(-10%);
+    z-index: 10;
+    background-color: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.row-btn:hover{
+    background-color: #f77f00;
+    transform: scale(1.1);
+}
+
+.prev-btn{
+    left: -20px;
+    text-indent: -2px;
+}
+
+.next-btn{
+    right: 20px;
+    text-indent: -2px;
+}
